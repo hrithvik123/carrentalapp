@@ -62,6 +62,7 @@ Available subcommands:
 
 ### Running JHS Car rental
 
+To make sure you all required dependencies installed, run ```pip install -r requirements.txt```. 
 To run the project simply run ```python manage.py runserver``` and you can naviagte to [http://localhost:8000](http://localhost:8000) to see the server.
 
 ## Contributor documentation
