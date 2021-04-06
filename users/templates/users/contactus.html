@@ -1,4 +1,5 @@
 {% extends "users/base.html" %}
+{% load static %}
 {% block content %}
 	<div class = "container-fluid padding">
 	<div class = "row welcome text-centre">
@@ -9,26 +10,22 @@
 	</div>
 	</div>
 	
-	
-	<div class = "container-fluid padding">
-	<div class = "row padding">
-		<div class = "col-md-4">
-			<div class = "card">
-				<img class = "card-img-top" src = "img/Travel-Photographer.jpg">
-				<div class = "card-body">
-					<h4 class = "card-title"> Sohaib Nabeel</h4>
-					<p class= "card-text"> some details </p>
-					<a href="#"class="btn btn-outline-secondary" > See Profile </a>
+
+		<div class = "row padding">
+			<div class = "col-md-4">
+				<div class = "card">
+					<img class = "card-img-top" src = "{% static 'img/Travel-Photographer.jpg' %}">
+					<div class = "card-body">
+						<h4 class = "card-title"> Sohaib Nabeel</h4>
+						<p class= "card-text"> some details </p>
+						<a href="#"class="btn btn-outline-secondary" > See Profile </a>
+					</div>
 				</div>
 			</div>
-		</div>
 		
-		
-	<div class = "container-fluid padding">
-	<div class = "row padding">
 		<div class = "col-md-4">
 			<div class = "card">
-				<img class = "card-img-top", src = "img/Travel-Photographer.jpg">
+				<img class = "card-img-top", src = "{% static 'img/Travel-Photographer.jpg' %}">
 				<div class = "card-body">
 					<h4 class = "card-title"> Jin Sato </h4>
 					<p class= "card-text"> some details </p>
@@ -38,11 +35,9 @@
 		</div>
 		
 		
-		<div class = "container-fluid padding">
-	<div class = "row padding">
 		<div class = "col-md-4">
 			<div class = "card">
-				<img class = "card-img-top", src = "img/Travel-Photographer.jpg">
+				<img class = "card-img-top", src = "{% static 'img/Travel-Photographer.jpg' %}">
 				<div class = "card-body">
 					<h4 class = "card-title"> Hrithvik Gadhiya </h4>
 					<p class= "card-text"> some details </p>
@@ -52,8 +47,7 @@
 			</div>
 		</div>
 		
-</div>
-</div>
+	</div>
 					
 		
 
