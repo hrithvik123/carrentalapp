@@ -1,6 +1,6 @@
 # JHS Car Rental
 
-JHS Car Renta is a car rental service webapp built using Django. Below is everything you need to get started with the JHS Car Rental app.
+JHS Car Rental is a car rental service webapp built using Django. Below is everything you need to get started with the JHS Car Rental app.
 
 ## Table of contents
   - [Running Locally](#running-locally)
