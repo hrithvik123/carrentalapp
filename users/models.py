@@ -60,17 +60,6 @@ class Rental_Package(models.Model):
     touring_package = models.IntegerField(default=0)
 
 
-class Booking(models.Model):
-    # default start of booking is next day
-    start_time = models.DateTimeField(
-        default=(datetime.now()+timedelta(days=1)))
-    end_time = models.DateTimeField(
-        default=(datetime.now()+timedelta(hours=48)))  # default end time is 24hrs from booking.
-    package_id = models.ForeignKey(Rental_Package, on_delete=models.CASCADE)
-    sales_id = models.ForeignKey(Sales_Associate, on_delete=models.CASCADE)
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
-
-
 class Customer_Service(models.Model):
     rate = models.IntegerField(default=5)
     feedback = models.CharField(max_length=255, blank=False)
@@ -92,6 +81,18 @@ class Vehicle(models.Model):
     seating_cap = models.IntegerField()
     transmission = models.CharField(max_length=1, choices=transmission_choices)
     availability = models.BooleanField()
+    package = models.ForeignKey(Rental_Package, on_delete=models.CASCADE)
+
+
+class Booking(models.Model):
+    # default start of booking is next day
+    start_time = models.DateTimeField(
+        default=(datetime.now()+timedelta(days=1)))
+    end_time = models.DateTimeField(
+        default=(datetime.now()+timedelta(hours=48)))  # default end time is 24hrs from booking.
+    vehicle = models.OneToOneField(Vehicle, on_delete=models.CASCADE)
+    sales_id = models.ForeignKey(Sales_Associate, on_delete=models.CASCADE)
+    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
 
 class Insurance(models.Model):
