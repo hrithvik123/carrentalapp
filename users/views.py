@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'users/homepage.html')
+    return render(request, 'users/index.html')
 
 
 def featuredCars(request):
