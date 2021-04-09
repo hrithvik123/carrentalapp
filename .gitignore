@@ -1,2 +1,5 @@
 env1/
 db.sqlite3
+.vscode/
+BCA_Auction/
+env/
