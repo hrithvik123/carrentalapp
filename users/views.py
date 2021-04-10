@@ -159,6 +159,12 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         messages.success(self.request, 'Booking made successfully')
         return super().form_valid(form)
 
+    def get_form(self, *args, **kwargs):
+        form = super(BookingCreateView, self).get_form(*args, **kwargs)
+        form.fields['vehicle'].queryset = Booking.objects.filter(
+            availability=True)
+        return form
+
     def get_success_url(self):
         return reverse('booking-all')
 
