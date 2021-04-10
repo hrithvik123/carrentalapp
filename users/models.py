@@ -28,7 +28,7 @@ class Login(models.Model):
 
 
 class Customer(User):
-    drivers_license = models.IntegerField(default=0, unique=True)
+    drivers_license = models.IntegerField(default=0)
 
     class Meta:
         # db_table = 'customer'
@@ -55,9 +55,18 @@ class Manager(User):
 
 
 class Rental_Package(models.Model):
+    car_types = (
+        ('Hatchback', 'Hatchback'),
+        ('Sedan', 'Sedan'),
+        ('SUV', 'SUV')
+    )
+    type = models.CharField(max_length=15, unique=True, choices=car_types)
     per_day_rent = models.IntegerField(default=0)
     per_month_rent = models.IntegerField(default=0)
     touring_package = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.type
 
 
 class Customer_Service(models.Model):
@@ -83,6 +92,9 @@ class Vehicle(models.Model):
     availability = models.BooleanField()
     package = models.ForeignKey(Rental_Package, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.make+" "+self.model
+
 
 class Booking(models.Model):
     # default start of booking is next day
@@ -90,9 +102,11 @@ class Booking(models.Model):
         default=(datetime.now()+timedelta(days=1)))
     end_time = models.DateTimeField(
         default=(datetime.now()+timedelta(hours=48)))  # default end time is 24hrs from booking.
-    vehicle = models.OneToOneField(Vehicle, on_delete=models.CASCADE)
-    sales_id = models.ForeignKey(Sales_Associate, on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    sales_id = models.ForeignKey(
+        Sales_Associate, on_delete=models.CASCADE, default=None, null=True)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    amount = models.IntegerField(default=0)
 
 
 class Insurance(models.Model):
