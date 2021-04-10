@@ -74,7 +74,7 @@ class Customer_Service(models.Model):
     feedback = models.CharField(max_length=255, blank=False)
     bot_chat = models.BooleanField()
     customer_question = models.CharField(max_length=255, blank=False)
-    sales_id = models.ForeignKey(Sales_Associate, on_delete=models.CASCADE)
+    sales_id = models.ForeignKey(Sales_Associate, on_delete=models.SET_NULL, null = True, default = None)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
 

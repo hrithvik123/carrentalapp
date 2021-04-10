@@ -1,0 +1,17 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+  {% block content %}
+      <div class="content-section">
+          <form method='POST'>
+              {% csrf_token %}
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Submit Ticket</legend>
+                {{ form|crispy }}
+              </fieldset>
+              <div class="form-group">
+                <button href= "customer_service_tickets.html" class="btn btn-outline-info">View Tickets</button>
+              </div>
+          </form>
+      </div>
+      <a class="btn btn-outline-info" href="#">Send Ticket</a>
+  {% endblock content %}

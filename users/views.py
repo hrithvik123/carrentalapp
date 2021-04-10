@@ -8,7 +8,7 @@ from django.views.generic import (
     DeleteView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Vehicle, Booking, Rental_Package, User
+from .models import Vehicle, Booking, Rental_Package, User, Customer_Service
 # Create your views here.
 
 
@@ -194,6 +194,30 @@ class AdminBookingListView(LoginRequiredMixin, ListView):
     #         return True
     #     return False
 
+
+
+class UserServiceTicket(LoginRequiredMixin,CreateView):
+    model = Customer_Service
+    fields = ['customer_question','rate','feedback','bot_chat']
+    template_name = 'users/customer_service.html'
+    def form_valid(self, form):
+        form.instance.customer_id = self.request.user.customer
+        form.instance.sales_id = None;
+        messages.success(self.request, 'ticket submitted successfully')
+        return super().form_valid(form)
+
+    def get_form(self, *args, **kwargs):
+        form = super(UserServiceTicket, self).get_form(*args, **kwargs)
+        return form
+        
+    def get_success_url(self):
+        return reverse('ticket-all')
+        
+        
+class UserViewTicket(LoginRequiredMixin,ListView):
+    model = Booking
+    context_object_name = 'viewtickets'
+    template_name = 'users/customer_service_tickets.html'
 
 # View for admin to edit a booking
 class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
