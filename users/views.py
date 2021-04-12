@@ -195,31 +195,29 @@ class AdminBookingListView(LoginRequiredMixin, ListView):
     #     return False
 
 
-class UserServiceTicket(LoginRequiredMixin, CreateView):
+class ContactUsCreateView(LoginRequiredMixin, CreateView):
     model = Customer_Service
-    fields = ['customer_question', 'rate', 'feedback', 'bot_chat']
-    template_name = 'users/customer_service.html'
+    fields = ['customer_question', 'rate', 'feedback']
+    template_name = 'users/contactus.html'
 
     def form_valid(self, form):
         form.instance.customer_id = self.request.user.customer
         form.instance.sales_id = None
-        messages.success(self.request, 'ticket submitted successfully')
+        messages.success(self.request, 'Message sent successfully')
         return super().form_valid(form)
 
     def get_form(self, *args, **kwargs):
-        form = super(UserServiceTicket, self).get_form(*args, **kwargs)
+        form = super(ContactUsCreateView, self).get_form(*args, **kwargs)
         return form
 
     def get_success_url(self):
-        return reverse('ticket-all')
+        return reverse('contact-us')
 
 
 class UserViewTicket(LoginRequiredMixin, ListView):
-    model = Booking
+    model = Customer_Service
     context_object_name = 'viewtickets'
     template_name = 'users/customer_service_tickets.html'
-
-# View for admin to edit a booking
 
 
 class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -234,7 +232,7 @@ class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         booking = self.get_object()
-        if self.request.user == booking.customer_id:
+        if self.request.user.customer == booking.customer_id:
             return True
         if self.request.user.is_superuser:
             return True
@@ -242,6 +240,21 @@ class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('booking-all')
+
+
+class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Booking
+    template_name = "staff/booking_delete.html"
+
+    def test_func(self):
+        booking = self.get_object()
+        if self.request.user.is_superuser:
+            return True
+        return False
+
+    def get_success_url(self):
+        messages.success(self.request, f'Booking deleted successfully')
+        return reverse('admin-booking-all')
 
 
 def contactUs(request):

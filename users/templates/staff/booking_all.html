@@ -21,7 +21,10 @@
                 <td>{{ booking.end_time }}</td>
                 <td>{{ booking.amount }}</td>
 				<td><button type="button" class="btn btn-light">
-                    <a href="{%url 'admin-booking-edit' booking.id %}">Edit booking</a>
+                    <a href="{%url 'booking-edit' booking.id %}">Edit</a>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                        <a href="{% url 'booking-delete' booking.id %}">Delete</a>
                     </button></td>
             </tr>
     {% endfor %}

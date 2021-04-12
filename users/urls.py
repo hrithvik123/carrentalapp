@@ -11,7 +11,7 @@ urlpatterns = [
     path('password_reset/', PasswordResetView.as_view(
         template_name='users/password_reset.html'), name='reset_password'),
     path('profile/<int:pk>/', users_views.UserUpdateView.as_view(), name='profile'),
-    path('contact_us/', users_views.contactUs, name='contact-us'),
+    path('contact_us/', users_views.ContactUsCreateView.as_view(), name='contact-us'),
     path('featured/', users_views.UserVehicleListView.as_view(), name='vehicle-all'),
     path('staff/vehicle/new',
          users_views.VehicleCreateView.as_view(), name='vehicle-new'),
@@ -30,9 +30,9 @@ urlpatterns = [
          name='admin-booking-all'),
     path('booking/<int:pk>/edit', users_views.BookingUpdateView.as_view(),
          name='booking-edit'),
+    path('booking/<int:pk>/delete', users_views.BookingCancelView.as_view(),
+         name='booking-delete'),
     path('testdrive/', users_views.testDrive, name='test-drive'),
-    path('contact_us/customer_service.html/', users_views.UserServiceTicket.as_view(),
-         name='customerservice-ticket'),
-    path('contact_us/customer_service/customer_service_tickets.html', users_views.UserViewTicket.as_view(),
-         name='ticket-all'),
+    path('contact_us/customer_service_tickets.html', users_views.UserViewTicket.as_view(),
+         name='ticket-all'),  # view all tickets
 ]
