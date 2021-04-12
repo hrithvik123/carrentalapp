@@ -21,7 +21,7 @@
                 <td>{{ booking.end_time }}</td>
                 <td>${{ booking.amount }}</td>
 				<td><button type="button" class="btn btn-light">
-                    <a href="#">Edit rental</a>
+                    <a href="{% url 'booking-edit' booking.id %}">Edit booking</a>
                     </button></td>
             </tr>
     {% endfor %}

@@ -28,7 +28,11 @@ urlpatterns = [
          name='booking-all'),
     path('staff/booking/all', users_views.AdminBookingListView.as_view(),
          name='admin-booking-all'),
-    path('staff/booking/<int:pk>/edit', users_views.BookingUpdateView.as_view(),
-         name='admin-booking-edit'),
+    path('booking/<int:pk>/edit', users_views.BookingUpdateView.as_view(),
+         name='booking-edit'),
     path('testdrive/', users_views.testDrive, name='test-drive'),
+    path('contact_us/customer_service.html/', users_views.UserServiceTicket.as_view(),
+         name='customerservice-ticket'),
+    path('contact_us/customer_service/customer_service_tickets.html', users_views.UserViewTicket.as_view(),
+         name='ticket-all'),
 ]

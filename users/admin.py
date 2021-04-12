@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import (
     User, Customer, Sales_Associate, Manager,
-    Rental_Package, Vehicle, Booking, Insurance
+    Rental_Package, Vehicle, Booking, Insurance,Customer_Service
 )
 
 
@@ -23,3 +23,4 @@ admin.site.register(Rental_Package)
 admin.site.register(Vehicle)
 admin.site.register(Booking)
 admin.site.register(Insurance)
+admin.site.register(Customer_Service)

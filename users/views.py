@@ -8,7 +8,7 @@ from django.views.generic import (
     DeleteView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Vehicle, Booking, Rental_Package, User
+from .models import Vehicle, Booking, Rental_Package, User, Customer_Service
 # Create your views here.
 
 
@@ -161,7 +161,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
     def get_form(self, *args, **kwargs):
         form = super(BookingCreateView, self).get_form(*args, **kwargs)
-        form.fields['vehicle'].queryset = Booking.objects.filter(
+        form.fields['vehicle'].queryset = Vehicle.objects.filter(
             availability=True)
         return form
 
@@ -195,11 +195,37 @@ class AdminBookingListView(LoginRequiredMixin, ListView):
     #     return False
 
 
+class UserServiceTicket(LoginRequiredMixin, CreateView):
+    model = Customer_Service
+    fields = ['customer_question', 'rate', 'feedback', 'bot_chat']
+    template_name = 'users/customer_service.html'
+
+    def form_valid(self, form):
+        form.instance.customer_id = self.request.user.customer
+        form.instance.sales_id = None
+        messages.success(self.request, 'ticket submitted successfully')
+        return super().form_valid(form)
+
+    def get_form(self, *args, **kwargs):
+        form = super(UserServiceTicket, self).get_form(*args, **kwargs)
+        return form
+
+    def get_success_url(self):
+        return reverse('ticket-all')
+
+
+class UserViewTicket(LoginRequiredMixin, ListView):
+    model = Booking
+    context_object_name = 'viewtickets'
+    template_name = 'users/customer_service_tickets.html'
+
 # View for admin to edit a booking
+
+
 class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Booking
     fields = ['start_time', 'end_time']
-    template_name = 'staff/booking_edit.html'
+    template_name = 'users/booking_edit.html'
 
     def form_valid(self, form):
         form.instance.sales_id = None
@@ -207,12 +233,15 @@ class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
+        booking = self.get_object()
+        if self.request.user == booking.customer_id:
+            return True
         if self.request.user.is_superuser:
             return True
         return False
 
     def get_success_url(self):
-        return reverse('admin-booking-all')
+        return reverse('booking-all')
 
 
 def contactUs(request):

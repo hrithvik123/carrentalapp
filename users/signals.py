@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import User, Customer, Booking, Rental_Package
+from .models import User, Customer, Booking, Rental_Package, Manager
 from django.utils import timezone
 from datetime import datetime
 
@@ -15,8 +15,17 @@ def create_customer(sender, instance, created, **kwargs):
         cust.save(force_insert=True)
 
 
+def create_salesassociate(sender, instance, created, **kwargs):
+    if instance.is_staff:
+        mang = instance
+        mang.__class__ = Manager
+        mang.manager_ssn = 0
+        mang.save(force_insert=True)
+
 # if Booking is created or changed, update price if applicable
 # use temp_amount to avoid an infinite loop
+
+
 @receiver(post_save, sender=Booking)
 def apply_booking(sender, instance, created, **kwargs):
     if created:
@@ -76,29 +85,29 @@ def apply_booking(sender, instance, created, **kwargs):
 
 # implement automatic updation of booking prices if rental package prices change
 # incomplete
-@receiver(post_save, sender=Rental_Package)
-def update_amount(sender, instance, created, **kwargs):
-    for book in Booking.objects.filter(vehicle.package == instance):
-        duration_seconds = book.end_time - book.start_time
-        duration = duration_seconds.total_seconds()
-        duration = duration/(60*60*24)
+# @receiver(post_save, sender=Rental_Package)
+# def update_amount(sender, instance, created, **kwargs):
+#     for book in Booking.objects.filter(vehicle.package == instance):
+#         duration_seconds = book.end_time - book.start_time
+#         duration = duration_seconds.total_seconds()
+#         duration = duration/(60*60*24)
 
-        if duration < 15:
-            temp_amount = instance.package.per_day_rent*duration
-            if book.amount != temp_amount:
-                book.amount = temp_amount
-                book.save()
-            return
-        if duration >= 15 and duration < 30:
-            temp_amount = instance.package.touring_package * \
-                (duration/15)
-            if book.amount != temp_amount:
-                book.amount = temp_amount
-                book.save()
-            return
-        if duration >= 30:
-            temp_amount = instance.package.per_month_rent*(duration/30)
-            if book.amount != temp_amount:
-                book.amount = temp_amount
-                book.save()
-            return
+#         if duration < 15:
+#             temp_amount = instance.package.per_day_rent*duration
+#             if book.amount != temp_amount:
+#                 book.amount = temp_amount
+#                 book.save()
+#             return
+#         if duration >= 15 and duration < 30:
+#             temp_amount = instance.package.touring_package * \
+#                 (duration/15)
+#             if book.amount != temp_amount:
+#                 book.amount = temp_amount
+#                 book.save()
+#             return
+#         if duration >= 30:
+#             temp_amount = instance.package.per_month_rent*(duration/30)
+#             if book.amount != temp_amount:
+#                 book.amount = temp_amount
+#                 book.save()
+#             return
