@@ -74,8 +74,12 @@ class Customer_Service(models.Model):
     feedback = models.CharField(max_length=255, blank=False)
     bot_chat = models.BooleanField()
     customer_question = models.CharField(max_length=255, blank=False)
-    sales_id = models.ForeignKey(Sales_Associate, on_delete=models.SET_NULL, null = True, default = None)
+    sales_id = models.ForeignKey(
+        Sales_Associate, on_delete=models.SET_NULL, null=True, default=None)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.customer_question
 
 
 class Vehicle(models.Model):
