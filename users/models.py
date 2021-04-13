@@ -72,7 +72,6 @@ class Rental_Package(models.Model):
 class Customer_Service(models.Model):
     rate = models.IntegerField(default=5)
     feedback = models.CharField(max_length=255, blank=False)
-    bot_chat = models.BooleanField()
     customer_question = models.CharField(max_length=255, blank=False)
     sales_id = models.ForeignKey(
         Sales_Associate, on_delete=models.SET_NULL, null=True, default=None)

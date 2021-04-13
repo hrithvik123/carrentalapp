@@ -21,15 +21,20 @@
                 <td>{{ booking.end_time }}</td>
                 <td>${{ booking.amount }}</td>
 				<td><button type="button" class="btn btn-light">
-                    <a href="{% url 'booking-edit' booking.id %}">Edit booking</a>
-                    </button></td>
+                    <a href="{% url 'booking-edit' booking.id %}">Edit</a>
+                    </button>
+                    {% if user.is_superuser %}
+                        <button type="button" class="btn btn-light">
+                            <a href="{% url 'booking-delete' booking.id %}">Delete</a>
+                        </button>
+                    {% endif %}
             </tr>
     {% endfor %}
             </tbody>
         </table>
         <a class="btn btn-outline-info" href="{% url 'booking-new' %}">Book another rental</a>
         {% if user.is_superuser %}
-        <a class="btn btn-outline-info" href="{% url 'vehicle-new' %}">Add vehicle</a>
+            <a class="btn btn-outline-info" href="{% url 'vehicle-new' %}">Add vehicle</a>
         {% endif %}
     </div>
 

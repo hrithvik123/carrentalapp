@@ -9,9 +9,11 @@
                 {{ form|crispy }}
               </fieldset>
               <div class="form-group">
-                <button href= "customer_service_tickets.html" class="btn btn-outline-info">View Tickets</button>
+                <button type="submit" class="btn btn-outline-info">Submit</button>
               </div>
           </form>
+          <div class="form-group">
+            <a href="{% url 'ticket-all' %}" class="btn btn-outline-info">View Tickets</a>
+          </div>
       </div>
-      <a class="btn btn-outline-info" href="#">Send Ticket</a>
   {% endblock content %}
