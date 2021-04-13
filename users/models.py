@@ -3,6 +3,21 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from datetime import datetime, timedelta
 
+# #Django API
+
+# from django.contrib.auth import get_user_model
+
+# # UserAPI = get_user_model()
+
+# class Post(models.Model):
+#     title = models.CharField(max_length=100)
+#     description = models.TextField()
+#     timestamp = models.DateTimeField(auto_now_add=True)
+#     # owner = models.ForeignKey(UserAPI, on_delete = models.CASCADE)
+
+#     def __str__(self):
+#         return self.title
+    
 
 # Create your models here.
 

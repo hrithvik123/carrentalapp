@@ -23,7 +23,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
-    path('', include('users.urls'))
+    path('', include('users.urls')),
+    #Django API
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('api.urls')), #for api 
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

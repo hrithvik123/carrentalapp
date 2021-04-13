@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    #Django API
+    #part1.2
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
