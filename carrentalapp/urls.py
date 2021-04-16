@@ -19,14 +19,21 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+#part3.1
+# from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     #Django API
+    #part1
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')), #for api 
+    #part 3.1 
+    # path('api/token/', obtain_auth_token, name ='obtain-token'),
+    #part3.2
+    # path('knox/auth', include('knox.urls'))
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

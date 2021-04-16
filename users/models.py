@@ -1,23 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
-from datetime import datetime, timedelta
-
-# #Django API
-
-# from django.contrib.auth import get_user_model
-
-# # UserAPI = get_user_model()
-
-# class Post(models.Model):
-#     title = models.CharField(max_length=100)
-#     description = models.TextField()
-#     timestamp = models.DateTimeField(auto_now_add=True)
-#     # owner = models.ForeignKey(UserAPI, on_delete = models.CASCADE)
-
-#     def __str__(self):
-#         return self.title
-    
+from datetime import datetime, timedelta  
 
 # Create your models here.
 
@@ -147,3 +131,20 @@ class Customer_testdrive(models.Model):
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(
         default=(datetime.now()+timedelta(minutes=5)))
+
+
+# #Django API
+
+#Part2 
+# from django.contrib.auth import get_user_model
+
+# User = get_user_model() # already defined in our project
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    # owner = models.ForeignKey(User, on_delete = models.CASCADE)
+
+    # def __str__(self):
+    #     return self.title
