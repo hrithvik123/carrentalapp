@@ -8,7 +8,7 @@ from django.views.generic import (
     DeleteView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Vehicle, Booking, Rental_Package, User, Customer_Service,Customer_testdrive
+from .models import Vehicle, Booking, Rental_Package, User, Customer_Service, Customer_testdrive
 # Create your views here.
 
 
@@ -195,7 +195,6 @@ class AdminBookingListView(LoginRequiredMixin, ListView):
     #     return False
 
 
-
 class ContactUsCreateView(LoginRequiredMixin, CreateView):
     model = Customer_Service
     fields = ['customer_question', 'rate', 'feedback']
@@ -214,6 +213,7 @@ class ContactUsCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('contact-us')
 
+
 class TestDriveCreateView(LoginRequiredMixin, CreateView):
     model = Customer_testdrive
     fields = ['customer_id', 'vehicle_id', 'route', 'start_time', 'end_time']
@@ -230,20 +230,25 @@ class TestDriveCreateView(LoginRequiredMixin, CreateView):
         return form
 
     def get_success_url(self):
-        return reverse('test-drive')
-
+        return reverse('testdrive-all')
 
 
 class UserViewTicket(LoginRequiredMixin, ListView):
     model = Customer_Service
     context_object_name = 'viewtickets'
     template_name = 'users/customer_service_tickets.html'
-    
-    
+
+
 class UserTestDrive(LoginRequiredMixin, ListView):
     model = Customer_testdrive
     context_object_name = 'viewtestdrive'
     template_name = 'users/test_drive_view.html'
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Customer_testdrive.objects.all()
+        else:
+            return Customer_testdrive.objects.filter(customer_id=self.request.user.customer)
 
 
 class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
