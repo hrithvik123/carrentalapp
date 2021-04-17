@@ -15,17 +15,19 @@ def create_customer(sender, instance, created, **kwargs):
         cust.drivers_license = 0
         cust.save(force_insert=True)
 
-    if not created:
-        if instance.is_staff:
-            sales = instance
-            sales.__class__ = Sales_Associate
-            sales.Ssn = 0
-            sales.save(force_insert=True)
-        if instance.is_superuser:
-            manager = instance
-            manager.__class__ = Manager
-            manager.manager_ssn = 0
-            manager.save(force_insert=True)
+    # if not created:
+    #     if instance.is_staff:
+    #         sales = instance
+    #         sales.__class__ = Sales_Associate
+    #         sales.Ssn = 0
+    #         sales.save(force_insert=True)
+    #         instance.delete()
+    #     if instance.is_superuser:
+    #         manager = instance
+    #         manager.__class__ = Manager
+    #         manager.manager_ssn = 0
+    #         manager.save(force_insert=True)
+    #         instance.delete()
 
     # if Booking is created or changed, update price if applicable
     # use temp_amount to avoid an infinite loop
