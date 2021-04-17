@@ -4,8 +4,9 @@ from .models import User, Customer, Booking, Rental_Package, Manager, Sales_Asso
 from django.utils import timezone
 from datetime import datetime
 
-
 # if User is created, automatically create a customer instance
+
+
 @receiver(post_save, sender=User)
 def create_customer(sender, instance, created, **kwargs):
     if created:
@@ -13,19 +14,21 @@ def create_customer(sender, instance, created, **kwargs):
         cust.__class__ = Customer
         cust.drivers_license = 0
         cust.save(force_insert=True)
-    if instance.is_staff:
-        mang = instance
-        mang.__class__ = Sales_Associate
-        mang.Ssn = 0
-        mang.save(force_insert=True)
-    if instance.is_superuser:
-        mang = instance
-        mang.__class__ = Manager
-        mang.manager_ssn = 0
-        mang.save(force_insert=True)
 
-# if Booking is created or changed, update price if applicable
-# use temp_amount to avoid an infinite loop
+    if not created:
+        if instance.is_staff:
+            sales = instance
+            sales.__class__ = Sales_Associate
+            sales.Ssn = 0
+            sales.save(force_insert=True)
+        if instance.is_superuser:
+            manager = instance
+            manager.__class__ = Manager
+            manager.manager_ssn = 0
+            manager.save(force_insert=True)
+
+    # if Booking is created or changed, update price if applicable
+    # use temp_amount to avoid an infinite loop
 
 
 @receiver(post_save, sender=Booking)

@@ -40,7 +40,7 @@ class Customer(User):
 
 
 class Sales_Associate(User):
-    Ssn = models.IntegerField(default=0, unique=True)
+    Ssn = models.IntegerField(default=0)
 
     class Meta:
         # db_table = 'sales_associate'
@@ -49,7 +49,7 @@ class Sales_Associate(User):
 
 
 class Manager(User):
-    manager_ssn = models.IntegerField(default=0, unique=True)
+    manager_ssn = models.IntegerField(default=0)
 
     class Meta:
         # db_table = 'manager'
