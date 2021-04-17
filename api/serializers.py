@@ -1,23 +1,35 @@
-#Part 2
+# Part 2
 from rest_framework import serializers
 from users import models
 
 # Customer
+
+
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Customer
         fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
             'gender',
             'age',
             'contactNo',
             'drivers_license',
         )
 
-#Manager
+# Manager
+
+
 class ManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Manager
         fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
             'gender',
             'age',
             'contactNo',
@@ -25,10 +37,16 @@ class ManagerSerializer(serializers.ModelSerializer):
         )
 
 # Sales Associate
+
+
 class AssociateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Sales_Associate
         fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
             'gender',
             'age',
             'contactNo',
@@ -36,6 +54,8 @@ class AssociateSerializer(serializers.ModelSerializer):
         )
 
 # Rental Package
+
+
 class RentalPackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Rental_Package
@@ -45,8 +65,10 @@ class RentalPackageSerializer(serializers.ModelSerializer):
             'per_month_rent',
             'touring_package',
         )
-  
-# Vehicle      
+
+# Vehicle
+
+
 class VehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Booking
@@ -59,8 +81,10 @@ class VehicleSerializer(serializers.ModelSerializer):
             'availability',
             'package',
         )
-        
+
 # Insurance
+
+
 class InsuranceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Insurance
@@ -71,6 +95,8 @@ class InsuranceSerializer(serializers.ModelSerializer):
         )
 
 # Booking
+
+
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Booking
@@ -82,4 +108,3 @@ class BookingSerializer(serializers.ModelSerializer):
             'customer_id',
             'amount'
         )
-        
