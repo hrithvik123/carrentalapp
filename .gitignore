@@ -4,3 +4,7 @@ db.sqlite3
 BCA_Auction/
 env/
 useful commands.txt
+api/__pycache__/
+carrentalapp/__pycache__/
+users/__pycache__/
+users/migrations/

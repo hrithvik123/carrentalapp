@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from .models import User, Customer, Booking, Rental_Package, Manager
+from .models import User, Customer, Booking, Rental_Package, Manager, Sales_Associate
 from django.utils import timezone
 from datetime import datetime
 
@@ -13,10 +13,12 @@ def create_customer(sender, instance, created, **kwargs):
         cust.__class__ = Customer
         cust.drivers_license = 0
         cust.save(force_insert=True)
-
-
-def create_salesassociate(sender, instance, created, **kwargs):
     if instance.is_staff:
+        mang = instance
+        mang.__class__ = Sales_Associate
+        mang.Ssn = 0
+        mang.save(force_insert=True)
+    if instance.is_superuser:
         mang = instance
         mang.__class__ = Manager
         mang.manager_ssn = 0

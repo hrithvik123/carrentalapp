@@ -16,6 +16,9 @@ class User(AbstractUser):
     contactNo = models.PositiveIntegerField(
         max_length=10, default='0', blank=True)
 
+    def __str__(self):
+        return self.username
+
 
 class Login(models.Model):
     email_id = models.OneToOneField(
