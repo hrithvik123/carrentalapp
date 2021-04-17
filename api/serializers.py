@@ -2,28 +2,76 @@
 from rest_framework import serializers
 from users import models
 
-# from users import models
-# from users.models import Post
-
-#VERY similiar to forms
-# from django import forms
-
-# class PostForm(forms.ModelForm):
-#         class Meta:
-#             model = Post
-#             fields = {
-#                 'title', 'description'
-#             }
-
-class PostSerializer(serializers.ModelSerializer):
+# Customer
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Post
+        model = models.Customer
         fields = (
-            'title', 
-            'description'
+            'gender',
+            'age',
+            'contactNo',
+            'drivers_license',
         )
 
-class PostSerializerBookings(serializers.ModelSerializer):
+#Manager
+class ManagerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Manager
+        fields = (
+            'gender',
+            'age',
+            'contactNo',
+            'manager_ssn',
+        )
+
+# Sales Associate
+class AssociateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Sales_Associate
+        fields = (
+            'gender',
+            'age',
+            'contactNo',
+            'Ssn',
+        )
+
+# Rental Package
+class RentalPackageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Rental_Package
+        fields = (
+            'type',
+            'per_day_rent',
+            'per_month_rent',
+            'touring_package',
+        )
+  
+# Vehicle      
+class VehicleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Booking
+        fields = (
+            'engine_no',
+            'price',
+            'model',
+            'seating_cap',
+            'transmission',
+            'availability',
+            'package',
+        )
+        
+# Insurance
+class InsuranceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Insurance
+        fields = (
+            'vehicle_id',
+            'insurance_prov',
+            'price',
+        )
+
+# Booking
+class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Booking
         fields = (

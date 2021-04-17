@@ -6,32 +6,20 @@ from api import views as api_views
 
 
 urlpatterns = [
-    #Part1.1 
-    # path('part1_1/', api_views.test_view, name = 'part1_1'),
-    # path('part1_1/bookings', api_views.BookingAPI, name = 'part1_1_bookings'),
-
-    #Part1.2
-    # path('part1_2/', api_views.TestView.as_view(), name = 'part1_2'),
-    # path('part1_2/bookings', api_views.BookingsAPI.as_view(), name = 'part1_2_bookings'),
-
-    #Part2
-    # path('part2/', api_views.TestView.as_view(), name = 'part2'),
-    # path('part2/bookings', api_views.BookingsAPI.as_view(), name = 'part2_bookings'),
-
-    #Part3
-    # path('part3/', api_views.TestView.as_view(), name = 'part3'),
-
-    #Part4.1 
-    path('part4.1/', api_views.PostView.as_view(), name = 'part4.1'),
-
-    #Part4.2
-    path('part4.2/', api_views.PostCreateView.as_view(), name = 'part4.2'),
-
-    #Part4.3
-    path('part4.3/', api_views.PostListCreateView.as_view(), name = 'part4.3'),
     
-    #Part4.4
-    path('post/edit/', api_views.PostUpdateView.as_view(), name = 'update'),
-    path('post/delete/', api_views.PostDeleteView.as_view(), name = 'delete')
-
+    # Customers
+    path('users/customers/', api_views.CustomersView.as_view(), name = 'customers'),
+    # Managers
+    path('users/managers/', api_views.ManagersView.as_view(), name = 'managers'),
+    # Sale Associates
+    path('users/associate/', api_views.AssociatesView.as_view(), name = 'associates'),
+    # Rental Packages
+    path('rental_package/', api_views.RentalPackagesView.as_view(), name = 'rentalPackages'),
+    # Vehicles
+    path('vehicles/info/', api_views.VehiclesView.as_view(), name = 'vehicles'),
+    # Insurances
+    path('vehicles/insurance/', api_views.InsurancesView.as_view(), name = 'insurances'),
+    # Bookings
+    path('booking/list/', api_views.BookingsView.as_view(), name = 'bookings'),
+    
 ]
