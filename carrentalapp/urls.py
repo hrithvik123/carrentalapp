@@ -20,7 +20,7 @@ from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 #part3.1
-# from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
@@ -31,7 +31,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')), #for api 
     #part 3.1 
-    # path('api/token/', obtain_auth_token, name ='obtain-token'),
+    path('api/token/', obtain_auth_token, name ='obtain-token'),
     #part3.2
     # path('knox/auth', include('knox.urls'))
 ]

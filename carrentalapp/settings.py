@@ -169,12 +169,12 @@ ACCOUNT_LOGOUT_ON_GET = True
 AUTH_USER_MODEL = 'users.User'
 
 
-#Part 3.1 Django API
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.TokenAuthentication'
-#     ]
-# }
+# Part 3.1 Django API
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}
 
 # REST_FRAMEWORK = {
 #     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
