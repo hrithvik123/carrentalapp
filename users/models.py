@@ -3,8 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from datetime import datetime, timedelta
 
-
 # Create your models here.
+
 
 class User(AbstractUser):
     gender_choices = (
@@ -132,3 +132,11 @@ class Customer_testdrive(models.Model):
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(
         default=(datetime.now()+timedelta(minutes=5)))
+
+
+# #Django API
+
+# Part2
+# from django.contrib.auth import get_user_model
+
+# User = get_user_model() # already defined in our project

@@ -212,6 +212,7 @@ class ContactUsCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('contact-us')
+<<<<<<< HEAD
 
 
 class TestDriveCreateView(LoginRequiredMixin, CreateView):
@@ -231,6 +232,8 @@ class TestDriveCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('testdrive-all')
+=======
+>>>>>>> 1fe1747b7586acc4be3ac61a7245976efce80752
 
 
 class UserViewTicket(LoginRequiredMixin, ListView):
@@ -238,6 +241,7 @@ class UserViewTicket(LoginRequiredMixin, ListView):
     context_object_name = 'viewtickets'
     template_name = 'users/customer_service_tickets.html'
 
+<<<<<<< HEAD
 
 class UserTestDrive(LoginRequiredMixin, ListView):
     model = Customer_testdrive
@@ -250,6 +254,8 @@ class UserTestDrive(LoginRequiredMixin, ListView):
         else:
             return Customer_testdrive.objects.filter(customer_id=self.request.user.customer)
 
+=======
+>>>>>>> 1fe1747b7586acc4be3ac61a7245976efce80752
 
 class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Booking

@@ -48,6 +48,17 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    #Django API
+    #part1.2
+    'rest_framework',
+    #part2
+    #'core' #we are using users and it is already included 
+    #part3.1
+    'rest_framework.authtoken', #comment when using knox
+    #part3.2 
+    # 'rest_framework', #already have 
+    # 'knox',
 ]
 
 MIDDLEWARE = [
@@ -156,3 +167,15 @@ MEDIA_URL = '/media/'
 
 ACCOUNT_LOGOUT_ON_GET = True
 AUTH_USER_MODEL = 'users.User'
+
+
+# Part 3.1 Django API
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+# }

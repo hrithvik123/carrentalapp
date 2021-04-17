@@ -6,6 +6,8 @@ from .models import (
     User, Customer, Sales_Associate, Manager,
     Rental_Package, Vehicle, Booking, Insurance,Customer_Service
 )
+#Django API part2
+from .models import Post
 
 
 class CustomUserAdmin(UserAdmin):
@@ -24,3 +26,5 @@ admin.site.register(Vehicle)
 admin.site.register(Booking)
 admin.site.register(Insurance)
 admin.site.register(Customer_Service)
+#Django API part2
+admin.site.register(Post) 
