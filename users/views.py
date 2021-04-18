@@ -8,7 +8,7 @@ from django.views.generic import (
     DeleteView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Vehicle, Booking, Rental_Package, User, Customer_Service, Customer_testdrive
+from .models import Vehicle, Booking, Rental_Package, User, Customer_Service, Customer_testdrive, Insurance
 # Create your views here.
 
 
@@ -231,6 +231,30 @@ class TestDriveCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('testdrive-all')
+        
+        
+class InsuranceCreateView(LoginRequiredMixin, CreateView):
+    model = Insurance
+    fields = ['vehicle_id','insurance_prov','price']
+    template_name = 'users/insurance.html'
+
+    def form_valid(self, form):
+        form.instance.customer_id = self.request.user.customer
+        form.instance.sales_id = None
+        messages.success(self.request, 'Message sent successfully')
+        return super().form_valid(form)
+
+    def get_form(self, *args, **kwargs):
+        form = super(InsuranceCreateView, self).get_form(*args, **kwargs)
+        return form
+
+    def get_success_url(self):
+        return reverse('insurance-all')
+
+class UserViewInsurance(LoginRequiredMixin, ListView):
+    model = Insurance
+    context_object_name = 'viewinsurance'
+    template_name = 'users/insurance_view.html'
 
 
 class UserViewTicket(LoginRequiredMixin, ListView):
