@@ -1,0 +1,37 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <h2>available Rental Packages</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Daily Rent</th>
+					<th>Monthly Rent</th>
+                    <th>Tour (15 days)</th>
+					<th></th>
+                </tr>
+            </thead>
+            <tbody>
+    {% for rental in rentals%}
+            <tr>
+                <td>{{ rental.type }}</td>
+                <td>${{ rental.per_day_rent }}</td>
+                <td>${{ rental.per_month_rent }}</td>
+                <td>${{ rental.touring_package }}</td>
+				<td><button type="button" class="btn btn-light">
+                    <a href="{% url 'rental-edit' rental.id %}">Edit rental</a>
+                    </button></td>
+            </tr>
+    {% endfor %}
+            </tbody>
+        </table>
+        {% if user.is_superuser %}
+        <a class="btn btn-outline-info" href="{%url 'rental-new' %}">Create Package</a>
+        <a class="btn btn-outline-info" href="{% url 'vehicle-new' %}">Add vehicle</a>
+		<a class="btn btn-outline-info" href="{% url 'insurance-new' %}">Add insurance</a>
+        {% endif %}
+    </div>
+
+{% endblock content %}

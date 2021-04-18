@@ -1,0 +1,66 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+	<div class = "container-fluid padding">
+	<div class = "row welcome text-centre">
+		<div class = "col-12">
+			<h1 class ="display-4">Contact Us</h1>
+		</div>
+		<hr>
+	</div>
+	</div>
+	
+
+		<div class = "row padding">
+			<div class = "col-md-4">
+				<div class = "card">
+					<img class = "card-img-top" src = "{% static 'img/Travel-Photographer.jpg' %}">
+					<div class = "card-body">
+						<h4 class = "card-title"> Sohaib Nabeel</h4>
+						<p class= "card-text"> some details </p>
+					</div>
+				</div>
+			</div>
+		
+		<div class = "col-md-4">
+			<div class = "card">
+				<img class = "card-img-top", src = "{% static 'img/Travel-Photographer.jpg' %}">
+				<div class = "card-body">
+					<h4 class = "card-title"> Jin Sato </h4>
+					<p class= "card-text"> some details </p>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class = "col-md-4">
+			<div class = "card">
+				<img class = "card-img-top", src = "{% static 'img/Travel-Photographer.jpg' %}">
+				<div class = "card-body">
+					<h4 class = "card-title"> Hrithvik Gadhiya </h4>
+					<p class= "card-text"> some details </p>
+				</div>
+			</div>
+		</div>
+		
+		{% if user.is_superuser %}
+			<a href="{% url 'ticket-all' %}" class="btn btn-outline-secondary justify-content-center" >View tickets</a>
+		{% endif %}
+	</div>
+					
+
+	<div class="content-section">
+		<form method='POST'>
+			{% csrf_token %}
+			<fieldset class="form-group">
+			  <legend class="border-bottom mb-4">Send us a message</legend>
+			  {{ form|crispy }}
+			</fieldset>
+			<div class="form-group">
+			  <button type="submit" class="btn btn-outline-info">Send message</button>
+			</div>
+		</form>
+	</div>
+		
+{% endblock content %}
