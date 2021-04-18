@@ -30,6 +30,7 @@
         {% if user.is_superuser %}
         <a class="btn btn-outline-info" href="{%url 'rental-new' %}">Create Package</a>
         <a class="btn btn-outline-info" href="{% url 'vehicle-new' %}">Add vehicle</a>
+		<a class="btn btn-outline-info" href="{% url 'insurance-new' %}">Add insurance</a>
         {% endif %}
     </div>
 

@@ -39,7 +39,9 @@ urlpatterns = [
          users_views.UserTestDrive.as_view(), name='testdrive-all'),
     path('testdrive/', users_views.testDrive, name='test-drive'),
     path('contact_us/customer_service_tickets.html', users_views.UserViewTicket.as_view(),
-         name='ticket-all'), 
-    path('staff/rental/all/insurance',users_views.InsuranceCreateView.as_view(), name = 'insurance-new'),
-    path('staff/rental/all/insurance_view',users_views.UserViewInsurance.as_view(), name = 'insurance-all'),
+         name='ticket-all'),
+    path('staff/insurance/new',
+         users_views.InsuranceCreateView.as_view(), name='insurance-new'),
+    path('staff/insurance/all',
+         users_views.UserViewInsurance.as_view(), name='insurance-all'),
 ]
