@@ -26,7 +26,16 @@
 					<td>{{ vehicle.package.per_day_rent }}</td>
 					<td><button type="button" class="btn btn-light">
 						<a href="{% url 'admin-vehicle-edit' vehicle.id %}">Edit</a>
-						</button></td>
+						</button>
+                    {% if not vehicle.insurance %} 
+                        <button type="button" class="btn btn-light">
+                        <a href="{% url 'insurance-new' %}">Add insurance details</a>
+                        </button>
+                    {% elif vehicle.insurance %}
+                        <button type="button" class="btn btn-light">
+                        <a href="#">Edit insurance</a>
+                        </button></td>
+                    {% endif %}
 				</tr>
     {% endfor %}
             </tbody>
