@@ -101,6 +101,10 @@ There are a few apps inside the project, and they are detailed below.
 
 This app contains the models, views and templates associated with getting the user logged in and accessing their data. One thing to note here is that the current homepage for the site exists here (in `/users/templates/users/index.html`)
 
+##### api
+
+This app contains the api endpoints implementaion using djangorestframework.
+
 ## License
 
 [GNU AGPLv3](https://choosealicense.com/licenses/agpl-3.0/)
