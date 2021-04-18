@@ -75,6 +75,7 @@ class VehicleSerializer(serializers.ModelSerializer):
         fields = (
             'engine_no',
             'price',
+            'make',
             'model',
             'seating_cap',
             'transmission',
