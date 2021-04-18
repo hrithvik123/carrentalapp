@@ -37,7 +37,6 @@ urlpatterns = [
          name='ticket-all'),  # view all tickets
     path('testdrive/test_drive_view.html',
          users_views.UserTestDrive.as_view(), name='testdrive-all'),
-    path('testdrive/', users_views.testDrive, name='test-drive'),
     path('contact_us/customer_service_tickets.html', users_views.UserViewTicket.as_view(),
          name='ticket-all'),
     path('staff/insurance/new',

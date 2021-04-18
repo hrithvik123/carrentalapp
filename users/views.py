@@ -231,11 +231,11 @@ class TestDriveCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('testdrive-all')
-        
-        
+
+
 class InsuranceCreateView(LoginRequiredMixin, CreateView):
     model = Insurance
-    fields = ['vehicle_id','insurance_prov','price']
+    fields = ['vehicle_id', 'insurance_prov', 'price']
     template_name = 'users/insurance.html'
 
     def form_valid(self, form):
@@ -250,6 +250,7 @@ class InsuranceCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('insurance-all')
+
 
 class UserViewInsurance(LoginRequiredMixin, ListView):
     model = Insurance
@@ -314,7 +315,3 @@ class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 def contactUs(request):
     return render(request, "users/contactus.html")
-
-
-def testDrive(request):
-    return render(request, "users/testdrive.html")
