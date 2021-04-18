@@ -28,7 +28,7 @@ class CustomersView(generics.ListCreateAPIView):
 class ManagersView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, )
     serializer_class = serializers.ManagerSerializer
-    queryset = models.User.objects.filter(is_staff=True)
+    queryset = models.User.objects.filter(is_superuser=True)
 
 # Sales Associates
 
@@ -36,7 +36,7 @@ class ManagersView(generics.ListCreateAPIView):
 class AssociatesView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, )
     serializer_class = serializers.AssociateSerializer
-    queryset = models.User.objects.filter(is_superuser=True)
+    queryset = models.User.objects.filter(is_staff=True)
 
 # Rental Packages
 
