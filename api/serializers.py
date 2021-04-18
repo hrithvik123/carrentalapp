@@ -71,7 +71,7 @@ class RentalPackageSerializer(serializers.ModelSerializer):
 
 class VehicleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Booking
+        model = models.Vehicle
         fields = (
             'engine_no',
             'price',
